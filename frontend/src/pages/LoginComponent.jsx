@@ -8,7 +8,7 @@ const LoginComponent = ({ setIsAuthenticated }) => {
     <div>
       <h2>Login</h2>
       <label>
-        Username:
+        email:
         <input
           type="text"
           value={email}
