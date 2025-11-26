@@ -2,19 +2,20 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const useSignup = function (setIsAuthenticated) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSignup = async () => {
+  const handleSignup = async (email, password, password2) => {
+    setError("");
+
     if (password !== password2) {
       setError("Passwords do not match");
       setIsLoading(false);
       return;
     }
+
+    setIsLoading(true);
 
     try {
       const response = await fetch("/api/users/signup", {
@@ -40,16 +41,10 @@ const useSignup = function (setIsAuthenticated) {
   };
 
   return {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    password2,
-    setPassword2,
     handleSignup,
     error,
     isLoading,
   };
 };
 
-export default useSignup;
+export { useSignup };
