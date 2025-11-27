@@ -1,8 +1,21 @@
 import useLogin from "../hooks/useLogin";
+import { useField } from "../hooks/useField";
 
 const LoginComponent = ({ setIsAuthenticated }) => {
-  const { email, setEmail, password, setPassword, handleLogin } =
-    useLogin(setIsAuthenticated);
+  const emailField = useField("text");
+  const passwordField = useField("password");
+
+  const { setEmail, setPassword, handleLogin } = useLogin(setIsAuthenticated);
+
+  const handleEmailChange = (e) => {
+    emailField.onChange(e);      
+    setEmail(e.target.value);     
+  };
+
+  const handlePasswordChange = (e) => {
+    passwordField.onChange(e);    
+    setPassword(e.target.value);  
+  };
 
   return (
     <div>
@@ -11,8 +24,8 @@ const LoginComponent = ({ setIsAuthenticated }) => {
         email:
         <input
           type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={emailField.value}
+          onChange={handleEmailChange}
         />
       </label>
       <br />
@@ -20,8 +33,8 @@ const LoginComponent = ({ setIsAuthenticated }) => {
         Password:
         <input
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={passwordField.value}
+          onChange={handlePasswordChange}
         />
       </label>
       <br />

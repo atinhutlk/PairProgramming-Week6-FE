@@ -8,7 +8,7 @@ const useLogin = (setIsAuthenticated) => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("/api/user/login", {
+      const response = await fetch("/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
